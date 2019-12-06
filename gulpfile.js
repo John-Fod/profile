@@ -15,16 +15,18 @@ function copy() {
         'app/**/*.jpg'
     ])
     .pipe(gulp.dest('build'))
+    .pipe(browserSync.stream({match: '**/*.html'}))
 }
 
 function processCss(){
-    return gulp.src('app/styles/*.scss')
+    return gulp.src(['app/styles/*.scss', '!app/styles/resources/**'])
     .pipe(sass({outputStyle: 'compressed'}))
     .pipe(cleanCss({compatibility: 'ie8'}))
     .pipe(rename({
         suffix: '.min'
     }))
-    .pipe(gulp.dest('build/styles'));
+    .pipe(gulp.dest('build/styles'))
+    .pipe(browserSync.stream({match: '**/*.css'}));
 }
 
 function processJs(){
@@ -64,6 +66,7 @@ function watch() {
     gulp.watch('app/scripts/*.js', gulp.series(processJs, reload));
     gulp.watch('app/styles/*.scss', gulp.series(processCss, reload));
     gulp.watch(['app/*.html', 'app/**/*.jpg'], gulp.series(copy, reload));
+    reload;
 }
 
 
