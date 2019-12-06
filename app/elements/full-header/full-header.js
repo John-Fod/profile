@@ -11,23 +11,14 @@ class FullHeader extends HTMLElement {
       textSpan.textContent = 'THIS IS FROM JS';
       wrapper.appendChild(textSpan);
       shadow.appendChild(wrapper);
-  
-      // Setup a click listener on <app-drawer> itself.
-      this.addEventListener('click', e => {
-        // Don't toggle the drawer if it's disabled.
-        if (this.disabled) {
-          return;
-        }
-        this.toggleDrawer();
-      });
     }
 
     connectedCallback(){
-      console.log("we are connected");
+      console.log('we are connecte');
     }
 
     disconnectedCallback(){
-      console.log("all done");
+      console.log('all done');
     }
 }
 

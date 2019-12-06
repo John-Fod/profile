@@ -2,7 +2,6 @@ const babel = require('gulp-babel');
 const browserSync = require('browser-sync');
 const cleanCss = require('gulp-clean-css');
 const gulp = require('gulp');
-// const liveReload = require('gulp-livereload');
 const rename = require('gulp-rename');
 const sass = require('gulp-sass');
 const uglify = require('gulp-uglify');
@@ -17,7 +16,7 @@ function copy() {
         'app/*.webmanifest'
     ], {base: './app/'})
     .pipe(gulp.dest('build'))
-    .pipe(browserSync.stream({match: '**/*.html'}))
+    .pipe(browserSync.stream({match: '**/*.html'}));
 }
 
 function processCss(){
@@ -56,24 +55,18 @@ function reload(done){
 function serve() {
     return server.init(
         {
-            server: 'build',
             open: true,
-            port: 3000
+            port: 3000,
+            server: 'build'
         }
-    )
-    // return browserSync.init({
-    //     baseDir: './',
-    //     server: 'build',
-    //     open: false,
-    //     port: 3000
-    // });
+    );
 }
 
 function watch() {
     gulp.watch('app/scripts/**/*.js', gulp.series(processJs, reload));
     gulp.watch('app/elements/**/*.js', gulp.series(processElements, reload));
     gulp.watch('app/styles/*.scss', gulp.series(processCss, reload));
-    gulp.watch(['app/*.html', 'app/**/*.jpg', 'app/**/*.png', "app/*.webmanifest", "app/sw.js"], gulp.series(copy, reload));
+    gulp.watch(['app/*.html', 'app/**/*.jpg', 'app/**/*.png', 'app/*.webmanifest', 'app/sw.js'], gulp.series(copy, reload));
     reload;
 }
 
