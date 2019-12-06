@@ -1,5 +1,10 @@
 {
   "name": "profile",
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
   "version": "1.0.0",
   "description": "This is a profile page",
   "main": "index.js",

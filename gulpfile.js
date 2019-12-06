@@ -11,15 +11,17 @@ const server = browserSync.create();
 
 function copy() {
     return gulp.src([
-        'app/*.html',
-        'app/**/*.jpg'
-    ])
+        'app/**/*.html',
+        'app/**/*.jpg',
+        'app/**/*.png',
+        'app/*.webmanifest'
+    ], {base: './app/'})
     .pipe(gulp.dest('build'))
     .pipe(browserSync.stream({match: '**/*.html'}))
 }
 
 function processCss(){
-    return gulp.src(['app/styles/*.scss', '!app/styles/resources/**'])
+    return gulp.src(['app/styles/*.scss', '!app/styles/resources/**'], {base: './app/'})
     .pipe(sass({outputStyle: 'compressed'}))
     .pipe(cleanCss({compatibility: 'ie8'}))
     .pipe(rename({
@@ -30,15 +32,20 @@ function processCss(){
 }
 
 function processJs(){
-    return gulp.src('app/scripts/*.js')
-    .pipe(babel({
-        presets: ['env']
-    }))
+    return gulp.src('app/scripts/*.js', {base: './app/'})
+    .pipe(babel())
     .pipe(uglify())
     .pipe(rename({
         suffix: '.min'
     }))
-    .pipe(gulp.dest('build/scripts'));
+    .pipe(gulp.dest('build'));
+}
+
+function processElements(){
+    return gulp.src('app/elements/**/*.js', {base: './app/'})
+    .pipe(babel())
+    .pipe(uglify())
+    .pipe(gulp.dest('build'));
 }
 
 function reload(done){
@@ -63,14 +70,15 @@ function serve() {
 }
 
 function watch() {
-    gulp.watch('app/scripts/*.js', gulp.series(processJs, reload));
+    gulp.watch('app/scripts/**/*.js', gulp.series(processJs, reload));
+    gulp.watch('app/elements/**/*.js', gulp.series(processElements, reload));
     gulp.watch('app/styles/*.scss', gulp.series(processCss, reload));
-    gulp.watch(['app/*.html', 'app/**/*.jpg'], gulp.series(copy, reload));
+    gulp.watch(['app/*.html', 'app/**/*.jpg', 'app/**/*.png', "app/*.webmanifest", "app/sw.js"], gulp.series(copy, reload));
     reload;
 }
 
 
-gulp.task('buildAndServe', gulp.series(copy, processCss, processJs, gulp.parallel(serve, watch)));
+gulp.task('buildAndServe', gulp.series(copy, processCss, processJs, processElements, gulp.parallel(serve, watch)));
 gulp.task('copy', copy);
 gulp.task('processCss', processCss);
 gulp.task('processJs', processJs);
