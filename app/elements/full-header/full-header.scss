@@ -1,0 +1,7 @@
+full-header:not(:defined) {
+    background-color:red;
+}
+
+full-header #shadow-root{
+    background-color: blue;
+}

@@ -11,12 +11,27 @@
         <link rel="stylesheet" href="/styles/main.min.css">
         <link rel="shortcut icon" href="">
         <link rel="manifest" href="/manifest.webmanifest">
+        <!-- CUSTOM ELEMENTS -->
         <script src='./elements/full-header/full-header.js'/>
+        <link rel="stylesheet" href='/elements/full-header/full-header.min.css'/>
+        
+        <script src='./elements/profile-picture/profile-picture.js'/>
     </head>
     <body>
-        <div>
+        <nav id='navigation'>
+          <div id='left-hand-side'>
+            <span>This Page</span>
+          </div>
+          <ul>
+            <li>Item 1</li>
+            <li>Item 2</li>
+          </ul>
+        </nav>
+
+        <div id='main-content'>
             <header>Hi</header>
-            <full-header></full-header>
+            <proflie-picture></proflie-picture>
+            <full-header></full-header>dddis one extr
         </div>
     <script>
         if ('serviceWorker' in navigator) {

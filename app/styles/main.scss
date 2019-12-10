@@ -1,4 +1,55 @@
 body{
-    background-color:#eee;
-    // background-color:#123;
+    background-color:#222;
+    // background-image: url('../images/45-degree-fabric-light.png');
+    // background-image: url('../images/binding-light.png');
+    // background-image: url('../images/church.png');
+    // background-image: url('../images/cloth-alike.png');
+    background-image: url('../images/fabric-of-squares.png');
+    background-blend-mode: lighten;
+    background-repeat: repeat;
+    padding: 0 0 50px 0;
+    margin: 0;
+}
+#navigation {
+    align-items: center;
+    margin: 0;
+    background-color: #000;
+    background-image: url('../images/low-contrast-linen.png');
+    display: flex;
+    justify-content: space-between;
+    height: 15mm;
+
+    #left-hand-side,
+    ul{
+        margin: 5px;
+    }
+
+    #left-hand-side{
+        min-width: 200px;
+        border-radius: 3px;
+        background-image: url('../images/brushed-alum.png'),linear-gradient(145deg, rgba(230,230,230,0.6) 33%, rgba(245,245,245,0.8) 40%, rgba(255,255,255,1) 45%, rgba(245,245,245,0.8) 50%, rgba(230,230,230,0.6) 100%);;
+        // background: linear-gradient(145deg, #bbb 33%, #ddd 40%, #fff 45%, #ddd 50%, #bbb 100%);
+        box-shadow: 4px 4px 4px rgba(0,0,0,0.5) inset;
+        height: 10mm;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    ul{
+        min-width: 200px;
+
+        li{
+            list-style: none;
+            display: inline-block;
+        }
+    }
+}
+
+#main-content {
+    width: 210mm;
+    height: 297mm;
+    background-color: #eee;
+    margin: 50px auto;
+    border-radius: 2px;
 }

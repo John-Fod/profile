@@ -20,13 +20,13 @@ function copy() {
 }
 
 function processCss(){
-    return gulp.src(['app/styles/*.scss', '!app/styles/resources/**'], {base: './app/'})
+    return gulp.src(['app/**/*.scss', '!app/styles/resources/**'], {base: './app/'})
     .pipe(sass({outputStyle: 'compressed'}))
     .pipe(cleanCss({compatibility: 'ie8'}))
     .pipe(rename({
         suffix: '.min'
     }))
-    .pipe(gulp.dest('build/styles'))
+    .pipe(gulp.dest('build'))
     .pipe(browserSync.stream({match: '**/*.css'}));
 }
 
@@ -65,7 +65,7 @@ function serve() {
 function watch() {
     gulp.watch('app/scripts/**/*.js', gulp.series(processJs, reload));
     gulp.watch('app/elements/**/*.js', gulp.series(processElements, reload));
-    gulp.watch('app/styles/*.scss', gulp.series(processCss, reload));
+    gulp.watch('app/**/*.scss', gulp.series(processCss, reload));
     gulp.watch(['app/*.html', 'app/**/*.jpg', 'app/**/*.png', 'app/*.webmanifest', 'app/sw.js'], gulp.series(copy, reload));
     reload;
 }
